@@ -217,3 +217,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Large data files
+data/*.parquet
+data/*.csv
+
+# Model files
+models/*.pkl
+
+# Other
+venv/
+__pycache__/
+*.egg-info/
+logs/

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLC Trip Duration Prediction</title>
+</head>
+
+<body>
+
+    <div class="login">
+
+        <h1>TLC Trip Duration Prediction</h1>
+
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <h2>
+                <legend>Enter Trip Details</legend>
+            </h2>
+
+            <!-- Trip Miles -->
+            <div class="mb-3">
+                <label class="form-label">Trip Miles</label>
+
+                <input class="form-control"
+                       type="number"
+                       step="1"
+                       name="trip_miles"
+                       placeholder="Enter Trip Miles"
+                       required />
+            </div>
+
+            <!-- Hour -->
+            <div class="mb-3">
+                <label class="form-label">Pickup Hour</label>
+
+                <input class="form-control"
+                       type="number"
+                       name="hour"
+                       placeholder="Enter Hour (0-23)"
+                       min="0"
+                       max="23"
+                       required />
+            </div>
+
+            <!-- Day of Week -->
+            <div class="mb-3">
+
+                <label class="form-label">Day of Week</label>
+
+                <select class="form-control"
+                        name="day_of_week"
+                        required>
+
+                    <option selected disabled value="">
+                        Select Day
+                    </option>
+
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+
+                </select>
+            </div>
+
+            <!-- Weekend -->
+            <div class="mb-3">
+
+                <label class="form-label">Is Weekend</label>
+
+                <select class="form-control"
+                        name="is_weekend"
+                        required>
+
+                    <option selected disabled value="">
+                        Select Option
+                    </option>
+
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+
+                </select>
+            </div>
+
+            <!-- Wait Time -->
+            <div class="mb-3">
+
+                <label class="form-label">Wait Time</label>
+
+                <input class="form-control"
+                       type="number"
+                       step="1"
+                       name="wait_time"
+                       placeholder="Enter Wait Time"
+                       required />
+            </div>
+
+            <!-- Uber -->
+            <div class="mb-3">
+
+                <label class="form-label">Is Uber</label>
+
+                <select class="form-control"
+                        name="is_uber"
+                        required>
+
+                    <option selected disabled value="">
+                        Select Option
+                    </option>
+
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+
+                </select>
+            </div>
+
+            <!-- Airport -->
+            <div class="mb-3">
+
+                <label class="form-label">Airport Trip</label>
+
+                <select class="form-control"
+                        name="is_airport"
+                        required>
+
+                    <option selected disabled value="">
+                        Select Option
+                    </option>
+
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+
+                </select>
+            </div>
+
+            <!-- PU Location -->
+            <div class="mb-3">
+
+                <label class="form-label">Pickup Location ID</label>
+
+                <input class="form-control"
+                       type="number"
+                       name="PULocationID"
+                       placeholder="Enter Pickup Location ID"
+                       required />
+            </div>
+
+            <!-- DO Location -->
+            <div class="mb-3">
+
+                <label class="form-label">Dropoff Location ID</label>
+
+                <input class="form-control"
+                       type="number"
+                       name="DOLocationID"
+                       placeholder="Enter Dropoff Location ID"
+                       required />
+            </div>
+
+            <!-- Congestion -->
+            <div class="mb-3">
+
+                <label class="form-label">Congestion Surcharge</label>
+
+                <input class="form-control"
+                       type="number"
+                       step="1"
+                       name="congestion_surcharge"
+                       placeholder="Enter Congestion Surcharge"
+                       required />
+            </div>
+
+            <!-- Shared Request -->
+            <div class="mb-3">
+
+                <label class="form-label">Shared Request</label>
+
+                <select class="form-control"
+                        name="shared_request_flag"
+                        required>
+
+                    <option selected disabled value="">
+                        Select Option
+                    </option>
+
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <div class="mb-3">
+
+                <input class="btn btn-primary"
+                       type="submit"
+                       value="Predict Trip Duration"
+                       required />
+            </div>
+
+        </form>
+
+        <h2>
+            Predicted Trip Duration: {{ results }} minutes
+        </h2>
+
+    </div>
+
+</body>
+
+</html>

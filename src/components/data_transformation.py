@@ -24,7 +24,7 @@ class DataTransformation:
     def get_data_transformer_object(self):
         try:
             numerical_columns = ["trip_miles",
-                                 "hour","day_of_week",
+                                 "hour",
                                  "is_weekend",
                                  "wait_time",
                                  "is_uber",
@@ -33,18 +33,26 @@ class DataTransformation:
                                  "DOLocationID",
                                  "congestion_surcharge",
                                  "shared_request_flag"]
+            categorical_columns = ["day_of_week"]
             num_pipeline = Pipeline(
                 steps=[
                 ("imputer", SimpleImputer(strategy="median")),
                 ("scaler", StandardScaler())
                 ]
             )
-
+            cat_pipeline=Pipeline(
+                steps=[
+                ("imputer", SimpleImputer(strategy="most_frequent")),
+                ("one_hot_encoder", OneHotEncoder(handle_unknown='ignore')),
+                ("scaler", StandardScaler(with_mean=False))
+                ]
+            )
             logging.info("Numerical columns completed")
 
             preprocessor = ColumnTransformer(
                 [
-                ("num_pipeline", num_pipeline, numerical_columns)
+                ("num_pipeline", num_pipeline, numerical_columns),
+                ("cat_pipeline", cat_pipeline, categorical_columns)
                 ]
                 )
             
